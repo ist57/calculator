@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+
+    <style>
+        body {
+            background-color: #6c5ce7;
+        }
+
+        #main {
+            width: 245px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin-left: 12px;
+            color: yellow;
+            font-size: 32px;
+
+        }
+
+
+        #numbers {
+            background-color: #ecf0f1;
+            width: 185px;
+            height: 235px;
+            float: left;
+        }
+
+        #numbers .num {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000000;
+            background-color: #ffff;
+            border-radius: 8px;
+            margin: 4px;
+        }
+
+        #operators {
+            background-color: #ffeaa7;
+            width: 60px;
+            height: 235px;
+            float: right;
+
+
+        }
+
+        #operators .operator {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000000;
+            background-color: #ffff;
+            border-radius: 8px;
+            margin: 4px;
+
+        }
+
+        .clear {
+            clear: both;
+        }
+
+
+
+
+        #resultOperators {
+            background-color: #ffeaa7;
+        }
+
+        #resultOperators .resultOperator {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000000;
+            background-color: #ffff;
+            border-radius: 8px;
+            margin: 4px;
+        }
+
+
+        #equation {
+            width: 174px !important;
+        }
+
+
+        #result {
+            background-color: #d63031;
+            width: 100%;
+            height: 60px;
+            overflow: hidden;
+        }
+
+
+        #resultInner {
+            background-color: #ffff;
+            display: block;
+            width: 225px;
+            height: 40px;
+            margin: 10px;
+            color: #000000;
+            font-size: 30px;
+
+        }
+    </style>
+
+    <script>
+            let selectedOperator = '';
+            let leftPart = '';
+            let rightPart = '';
+       
+            
+        window.onload = function (){
+
+       
+
+            var numbers = document.querySelectorAll(".num");
+            for (var i = 0; i < numbers.length; i++) {
+               
+
+             
+                numbers[i].addEventListener("click", function () {
+
+                    document.getElementById('resultInner').innerHTML += this.value;
+
+
+                    if (selectedOperator == '') {
+                        leftPart += this.value;
+                     
+                    }
+            
+                    else if (selectedOperator != '') {
+                        rightPart += this.value;                    
+                    }
+                  
+
+                  
+                                           
+                    console.log(numbers[i]);
+
+                }, false); 
+            }
+
+
+            var operators = document.querySelectorAll(".operator");
+            for (var i = 0; i < operators.length; i++) {
+                operators[i].addEventListener("click", function () {
+
+                    document.getElementById('resultInner').innerHTML += this.value;
+                    selectedOperator = this.value;
+                    console.log(operators[i]);
+
+                }, false);
+            }
+
+
+            document.getElementById('equation').addEventListener("click", function () {
+
+                if (selectedOperator == '+') {
+                    document.getElementById('resultInner').innerHTML = parseInt(leftPart) + parseInt(rightPart);    
+                                 
+                }
+                else if (selectedOperator == '-') {
+                    document.getElementById('resultInner').innerHTML = parseInt(leftPart) - parseInt(rightPart);
+                }
+                else if (selectedOperator == '*') {
+                    document.getElementById('resultInner').innerHTML = parseInt(leftPart) * parseInt(rightPart);
+                }
+                else if (selectedOperator == '/') {
+                    document.getElementById('resultInner').innerHTML = parseInt(leftPart) / parseInt(rightPart);
+                }
+
+                leftPart=document.getElementById('resultInner').innerHTML;
+            
+                rightPart='';
+
+
+              
+                
+
+                 
+              
+            }, false);
+
+
+
+        };
+
+    </script>
+
+</head>
+
+<body>
+    <div id="main">
+        <h1>Basic Calculator</h1>
+        <div id="result">
+            <div id="resultInner">
+            </div>
+        </div>
+        <div id="numbers">
+            <button value="7" class="num">7</button>
+            <button value="8" class="num">8</button>
+            <button value="9" class="num">9</button>
+            <button value="4" class="num">4</button>
+            <button value="5" class="num">5</button>
+            <button value="6" class="num">6</button>
+            <button value="1" class="num">1</button>
+            <button value="2" class="num">2</button>
+            <button value="3" class="num">3</button>
+            <button value="0" class="num">0</button>
+            <button id="dot" class="num">.</button>
+        </div>
+        <div id="operators">
+            <button value="+" class="operator">+</button>
+            <button value="-" class="operator">-</button>
+            <button value="*" class="operator">*</button>
+            <button value="/" class="operator">/</button>
+        </div>
+        <div class="clear"></div>
+        <div id="resultOperators">
+            <button id="equation" class="resultOperator">=</button>
+            <button id="delete" class="resultOperator" onclick="window.location.reload()">C</button>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
